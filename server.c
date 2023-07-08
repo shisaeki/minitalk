@@ -6,14 +6,23 @@
 /*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 16:02:46 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/02 18:46:27 by shisaeki         ###   ########.fr       */
+/*   Updated: 2023/07/08 18:50:20 by shisaeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
 #include <string.h>
+
+void	signal_handler(int signum)
+{
+	if (signum == SIGUSR1)
+		write(STDOUT_FILENO, "SIGUSR1\n", 8);
+	else
+		write(STDOUT_FILENO, "SIGUSR2\n", 8);
+}
 
 int	main()
 {
