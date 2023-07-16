@@ -6,28 +6,23 @@
 /*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 16:02:46 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/16 12:32:56 by shisaeki         ###   ########.fr       */
+/*   Updated: 2023/07/16 17:55:06 by shisaeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minitalk.h"
 #include <unistd.h>
 #include <stdlib.h>
-#include <stdio.h>
-#include <signal.h>
 #include <string.h>
-
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
 
 void	signal_handler(int signum)
 {
-	static int count = 0;
-	static unsigned char c = 0;
+	static int				count;
+	static unsigned char	c;
 
+	count = 0;
+	c = 0;
 	c |= (signum == SIGUSR1);
-
 	if (++count == 8)
 	{
 		count = 0;
@@ -40,22 +35,19 @@ void	signal_handler(int signum)
 
 int	main()
 {
-	pid_t	pid;
-	struct	sigaction sa;
-	char	buffer[255];
+	pid_t				pid;
+	struct sigaction	sa;
+	char				buffer[255];
 
 	pid = getpid();
 	sprintf(buffer, "Process ID: %d\n", (int) pid);
-	write(STDOUT_FILENO, buffer, strlen(buffer));
-
+	write(STDOUT_FILENO, buffer, ft_strlen(buffer));
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_handler;
 	sa.sa_flags = 0;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-
-	while(1)
+	while (1)
 		pause();
-
 	return (0);
 }
