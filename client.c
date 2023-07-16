@@ -6,7 +6,7 @@
 /*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 16:02:59 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/08 18:59:59 by shisaeki         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:32:58 by shisaeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	send_str(int pid, char *str)
 		str++;
 	}
 	i = 8;
-//	while (i)
-//	{
-//		kill(pid, SIGUSR2);
-//		i--;
-//		usleep(100);
-//	}
+	while (i)
+	{
+		kill(pid, SIGUSR2);
+		i--;
+		usleep(100);
+	}
 }
 
 int	main(int argc, char **argv)

@@ -6,7 +6,7 @@
 /*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 16:02:46 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/08 18:50:20 by shisaeki         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:32:56 by shisaeki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,26 @@
 #include <signal.h>
 #include <string.h>
 
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
 void	signal_handler(int signum)
 {
-	if (signum == SIGUSR1)
-		write(STDOUT_FILENO, "SIGUSR1\n", 8);
+	static int count = 0;
+	static unsigned char c = 0;
+
+	c |= (signum == SIGUSR1);
+
+	if (++count == 8)
+	{
+		count = 0;
+		ft_putchar_fd(c, 1);
+		c = 0;
+	}
 	else
-		write(STDOUT_FILENO, "SIGUSR2\n", 8);
+		c <<= 1;
 }
 
 int	main()
