@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/16 16:43:49 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/16 17:14:15 by shisaeki         ###   ########.fr       */
+/*   Created: 2023/10/11 23:57:35 by shinsaeki         #+#    #+#             */
+/*   Updated: 2023/10/14 13:19:55 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 # define MINITALK_H
 
 # include <unistd.h>
-# include <stdio.h>
+# include <stdlib.h>
 # include <signal.h>
 # include <limits.h>
+# include <stdio.h>
 
 void	ft_putchar_fd(char c, int fd);
-size_t	ft_strlen(const char *s);
-int		ft_atoi(const char *str);
+int     ft_atoi(const char *str);
+char	*ft_itoa(int n);
 
 #endif

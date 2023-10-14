@@ -3,61 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   client.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/02 16:02:59 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/16 17:56:57 by shisaeki         ###   ########.fr       */
+/*   Created: 2023/10/05 13:40:29 by shinsaeki         #+#    #+#             */
+/*   Updated: 2023/10/14 13:36:49 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
-#include <unistd.h>
-#include <stdlib.h>
-#include <string.h>
-#include <signal.h>
 
-static void	send_str(int pid, char *str)
+int main(int argc, char** argv)
 {
-	int		i;
-	char	c;
-
-	while (*str)
-	{
-		i = 8;
-		c = *str;
-		while (i--)
-		{
-			if (c >> i & 1)
-			{
-				kill(pid, SIGUSR1);
-				write(1, "1", 1);
-			}
-			else
-			{
-				kill(pid, SIGUSR2);
-				write(1, "0", 1);
-			}
-			usleep(100);
-		}
-		str++;
-	}
-	i = 8;
-	while (i)
-	{
-		kill(pid, SIGUSR2);
-		write(1, "0", 1);
-		i--;
-		usleep(100);
-	}
-}
-
-int	main(int argc, char **argv)
-{
-	pid_t	target_pid;
-
-	if (argc != 3)
-		return (0);
-	target_pid = atoi(argv[1]);
-	send_str(target_pid, argv[2]);
-	return (0);
+    if (argc != 3)
+        return (0);
+    
+    char *str = argv[2];
+    int i = 7;
+    while (*str)
+    {
+        if (*str >> i & 1)
+        {
+            kill (ft_atoi(argv[1]), SIGUSR1);
+            write(STDOUT_FILENO, "1", 1);
+        }
+        else
+        {
+            kill (ft_atoi(argv[1]), SIGUSR2);
+            write(STDOUT_FILENO, "0", 1);
+        }    
+        if (i == 0)
+        {
+            write(STDOUT_FILENO, "\n", 1);
+            i += 8;
+            str++;
+        }
+        usleep(100);
+        i--;
+    }
 }

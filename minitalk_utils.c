@@ -3,16 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minitalk_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/16 16:42:29 by shisaeki          #+#    #+#             */
-/*   Updated: 2023/07/16 17:12:58 by shisaeki         ###   ########.fr       */
+/*   Created: 2023/10/11 23:55:55 by shinsaeki         #+#    #+#             */
+/*   Updated: 2023/10/14 13:20:09 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
 
-static int	skip_space(char c)
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
+
+int	skip_space(char c)
 {
 	if (c == '\t' || c == '\n' || c == '\v'
 		|| c == '\f' || c == '\r' || c == ' ')
@@ -20,7 +25,7 @@ static int	skip_space(char c)
 	return (0);
 }
 
-static long	get_long(const char *str, int sign)
+long	get_long(const char *str, int sign)
 {
 	long	nbr;
 	size_t	i;
@@ -49,21 +54,6 @@ static long	get_long(const char *str, int sign)
 	return (sign * nbr);
 }
 
-void	ft_putchar_fd(char c, int fd)
-{
-	write(fd, &c, 1);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	while (s[len] != '\0')
-		len++;
-	return (len);
-}
-
 int	ft_atoi(const char *str)
 {
 	int		sign;
@@ -80,4 +70,55 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (get_long(&str[i], sign));
+}
+
+long int	ft_abs(long int nbr)
+{
+	if (nbr < 0)
+		return (-1 * nbr);
+	else
+		return (nbr);
+}
+
+int	ft_len(long int nbr)
+{
+	int	len;
+
+	if (nbr <= 0)
+		len = 1;
+	else
+		len = 0;
+	while (nbr != 0)
+	{
+		nbr = nbr / 10;
+		len++;
+	}
+	return (len);
+}
+
+char	*ft_itoa(int n)
+{
+	int		len;
+	int		sign;
+	char	*c;
+
+	if (n < 0)
+		sign = -1;
+	else
+		sign = 1;
+	len = ft_len(n);
+	c = (char *)malloc(sizeof(char) * len + 1);
+	if (c == NULL)
+		return (0);
+	c[len] = '\0';
+	len--;
+	while (len >= 0)
+	{
+		c[len] = '0' + ft_abs(n % 10);
+		n = ft_abs(n / 10);
+		len--;
+	}
+	if (sign == -1)
+		c[0] = '-';
+	return (c);
 }
