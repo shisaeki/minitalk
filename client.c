@@ -6,11 +6,32 @@
 /*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:40:29 by shinsaeki         #+#    #+#             */
-/*   Updated: 2023/10/14 13:36:49 by shinsaeki        ###   ########.fr       */
+/*   Updated: 2023/10/14 15:09:39 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minitalk.h"
+
+void send_str(int pid, char *str)
+{
+    int count;
+
+    count = 7;
+    while (*str)
+    {
+        if (*str >> count & 1)
+            kill (pid, SIGUSR1);
+        else
+            kill (pid, SIGUSR2);
+        if (count == 0)
+        {
+            count += 8;
+            str++;
+        }
+        usleep(100);
+        count--;
+    }
+}
 
 int main(int argc, char** argv)
 {
@@ -18,26 +39,7 @@ int main(int argc, char** argv)
         return (0);
     
     char *str = argv[2];
-    int i = 7;
-    while (*str)
-    {
-        if (*str >> i & 1)
-        {
-            kill (ft_atoi(argv[1]), SIGUSR1);
-            write(STDOUT_FILENO, "1", 1);
-        }
-        else
-        {
-            kill (ft_atoi(argv[1]), SIGUSR2);
-            write(STDOUT_FILENO, "0", 1);
-        }    
-        if (i == 0)
-        {
-            write(STDOUT_FILENO, "\n", 1);
-            i += 8;
-            str++;
-        }
-        usleep(100);
-        i--;
-    }
+    send_str(ft_atoi(argv[1]), argv[2]);
+
+    return (0);
 }
