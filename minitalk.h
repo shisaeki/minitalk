@@ -6,7 +6,7 @@
 /*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 23:57:35 by shinsaeki         #+#    #+#             */
-/*   Updated: 2023/10/14 13:19:55 by shinsaeki        ###   ########.fr       */
+/*   Updated: 2023/10/18 13:10:35 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 void	ft_putchar_fd(char c, int fd);
-int     ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 char	*ft_itoa(int n);
 
 #endif

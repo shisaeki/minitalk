@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: shisaeki <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/16 17:04:57 by shisaeki          #+#    #+#              #
-#    Updated: 2023/07/16 17:54:24 by shisaeki         ###   ########.fr        #
+#    Updated: 2023/10/18 13:19:29 by shinsaeki        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CC=gcc
 
 CFLAGS=-g -Wall -Wextra -Werror
 
-SRCS_SERVER=server.c minitalk_utils.c
-SRCS_CLIENT=client.c minitalk_utils.c
+SRCS_SERVER=server.c ft_atoi.c ft_itoa.c
+SRCS_CLIENT=client.c ft_atoi.c ft_itoa.c
 
 INCLUDES=minitalk.h \
 
