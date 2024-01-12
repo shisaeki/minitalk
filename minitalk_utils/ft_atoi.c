@@ -6,11 +6,11 @@
 /*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 23:55:55 by shinsaeki         #+#    #+#             */
-/*   Updated: 2023/10/18 13:14:24 by shinsaeki        ###   ########.fr       */
+/*   Updated: 2024/01/12 12:33:06 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+#include "../minitalk.h"
 
 void	ft_putchar_fd(char c, int fd)
 {
