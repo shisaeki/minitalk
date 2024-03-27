@@ -6,7 +6,7 @@
 /*   By: shinsaeki <shinsaeki@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/05 13:37:38 by shinsaeki         #+#    #+#             */
-/*   Updated: 2023/10/18 13:06:15 by shinsaeki        ###   ########.fr       */
+/*   Updated: 2024/03/20 09:13:20 by shinsaeki        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ int	main(int argc, char **argv)
 	pid_t				pid;
 	struct sigaction	sa;
 
+	if (argc != 0)
+		return (0);
 	pid = getpid();
 	sigemptyset(&sa.sa_mask);
 	sa.sa_handler = signal_handler;
